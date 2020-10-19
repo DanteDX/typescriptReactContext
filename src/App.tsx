@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import Form from './components/Form';
+import Task from './components/Task';
 
-function App() {
+const App = () => {
+  const [tasks,setTask] = useState<string[]>([]);
+  const propForm = (currentTask:string) =>{
+    setTask([...tasks,currentTask]);
+  }
+  const handleDelete = (task:string) =>{
+    setTask(tasks.filter(each => each!==task));
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form propForm={propForm}/>
+      <h1>Hello</h1>
+      <Task tasks={tasks} handleDelete={handleDelete}/>
     </div>
   );
 }
