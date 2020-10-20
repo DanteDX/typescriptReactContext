@@ -1,21 +1,27 @@
-import React, { FormEvent } from 'react';
+import React,{useContext} from 'react';
+import {PostContext} from '../contexts/PostContext';
 
-interface Forming{
-    propForm:(str:string)=>void;
-}
+const Form:React.FC = () =>{
 
-const Form:React.FC<Forming> = props => {
-    const handleSubmit = (e:FormEvent<HTMLFormElement>) =>{
+    const submitHandler = (e:React.FormEvent) =>{
         e.preventDefault();
-        const currentTask  = e.currentTarget.task.value;
-        props.propForm(currentTask);
-        e.currentTarget.task.value = "";
+        const form = e.target as HTMLFormElement;
+        const username = form.username as HTMLInputElement;
+        const email = form.email as HTMLInputElement;
+        console.log(username.value,email.value);
     }
+    const value = useContext(PostContext);
+    value!.posts.map(x => console.log(x.postContent));
+    value!.postDummy();
     return(
-        <form onSubmit={(e) => handleSubmit(e)}>
-            <label htmlFor="task">Enter Your current task: </label>
-            <input type="text" id="task" name="task" /><br/>
-            <input type="submit" value="Add" />
+        <form className="registerForm" onSubmit={e => submitHandler(e)}>
+            <label htmlFor="username">Name:</label>
+            <input type="text" id="username" name="username" />
+            <br />
+            <label htmlFor="email">Emailv: </label>
+            <input type="email" id="email" name="email" />
+            <br />
+            <input type="submit" value="Register"/>
         </form>
     )
 }

@@ -1,0 +1,31 @@
+body{
+    margin:0px;
+    padding:0px;
+}
+
+.navbar{
+    display:flex;
+    justify-content: space-around;
+    background-color: grey;
+    list-style-type:none;
+    padding:4px;
+}
+
+.navbar li{
+    background-color: bisque;
+    color:red;
+    padding:10px;
+    border:1px solid white;
+}
+
+.navbar li:hover{
+    background-color: #e6dfd8;
+    cursor:pointer;
+    color:red;
+    padding:10px;
+    border:1px solid white;
+    position:relative;
+    top:2px;
+    box-shadow: 1px 1px 3px 3px white;
+    
+}

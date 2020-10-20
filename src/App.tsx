@@ -1,22 +1,25 @@
-import React,{useState} from 'react';
-import Form from './components/Form';
-import Task from './components/Task';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import NavBar from "./components/navbar/NavBar";
+import Form from "./components/Form";
+import News from "./components/News";
+import PostContextProvider from "./contexts/PostContext";
 
-const App = () => {
-  const [tasks,setTask] = useState<string[]>([]);
-  const propForm = (currentTask:string) =>{
-    setTask([...tasks,currentTask]);
-  }
-  const handleDelete = (task:string) =>{
-    setTask(tasks.filter(each => each!==task));
-  }
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <Form propForm={propForm}/>
-      <h1>Hello</h1>
-      <Task tasks={tasks} handleDelete={handleDelete}/>
-    </div>
+    <BrowserRouter>
+      <PostContextProvider>
+        <div className="appContent">
+          <p>This is the app root component</p>
+          <NavBar />
+          <Switch>
+            <Route exact path="/form" component={Form} />
+            <Route exact path="/news" component={News} />
+          </Switch>
+        </div>
+      </PostContextProvider>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
